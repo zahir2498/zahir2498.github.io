@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player with YouTube Information</title>
+    <title>YouTube and MP4 Video in Plyr</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +17,7 @@
             position: relative;
             width: 50%; /* Width of the player */
             margin: 30px auto; /* Center the player */
-            padding-bottom: 30%; /* Reduced height for the player */
+            padding-bottom: 28%; /* Reduced height for the player */
             height: 0;
             background-color: #000;
         }
@@ -55,22 +55,17 @@
 
     <!-- Video Player -->
     <div class="player-wrapper">
-        <!-- YouTube Video Embed -->
-        <iframe id="youtube-player" src="https://www.youtube.com/embed/u3HZ8smiUPs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <!-- Plyr for YouTube -->
+       
+        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="u3HZ8smiUPs"></div> 
+
         
-        <!-- Or, for an MP4 video, use this instead -->
-        <!-- 
-        <video id="mp4-player" controls>
-            <source src="your-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        -->
     </div>
 
     <!-- Text Section -->
     <div class="text-section">
         <h1>Sir i have my own website www.wozde.com</h1>
-        <h2>This is my Email wozde.com@gmail.com I have a problem in my fiverr account i not receive payment here so i will send yo invoice from paypal you have to buy my service i also have telegram t.me/wozde</h2>
+        <h2>This is my Email wozde.com@gmail.com I have a problem in my fiverr account i not receive payment here so i will send yo invoice from paypal you have to buy my service i also have telegram t.me/wozde wa.me/+918820364656</h2>
 
         <!-- About YouTube -->
         <p>
@@ -84,11 +79,13 @@
         </p>
     </div>
 
+    <!-- Plyr JS -->
     <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
     <script>
-        const player = new Plyr('#youtube-player');
-        // Uncomment for MP4 video:
-        // const player = new Plyr('#mp4-player');
+        
+         const player = new Plyr('#player');
+
+       
     </script>
 </body>
 </html>
