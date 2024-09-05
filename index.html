@@ -3,114 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Video Player</title>
+  <title>YouTube and Video Integration</title>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      flex-direction: column;
+      background-color: #f9f9f9;
+      padding: 20px;
+      color: #333;
     }
 
-    .video-container {
-      width: 80%;
-      max-width: 800px;
+    h1 {
+      font-size: 36px;
+      color: #2c3e50;
       text-align: center;
     }
 
-    .video-container h1 {
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 10px;
+    h2 {
+      font-size: 28px;
+      color: #16a085;
+      text-align: center;
     }
 
-    .video-container h2 {
-      font-size: 24px;
-      color: #555;
+    p {
+      font-size: 18px;
+      line-height: 1.6;
       margin-bottom: 20px;
     }
 
-    .dropdown-container {
-      margin-bottom: 20px;
-    }
-
-    select, input {
-      padding: 10px;
-      font-size: 16px;
-      margin-right: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    .video-container {
+      margin: 40px 0;
+      text-align: center;
     }
 
     .plyr__video-wrapper {
       border-radius: 10px;
       overflow: hidden;
     }
+
+    .dropdown-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
 
+  <h1>The Power of YouTube</h1>
+  <h2>How YouTube Revolutionized Video Sharing</h2>
+
+  <p>
+    Since its launch in 2005, YouTube has become the world's largest video-sharing platform. With over 2 billion monthly users, 
+    it has revolutionized how we consume and create content. Whether you're a casual viewer, a content creator, or a business 
+    trying to reach a global audience, YouTube offers limitless opportunities.
+  </p>
+
+  <p>
+    One of the key factors behind YouTube's success is its accessibility. Anyone with an internet connection can upload videos, 
+    whether it's a tutorial, a music video, or even a full-length documentary. This has led to the platform becoming a hub for 
+    educational resources, entertainment, and user-generated content. 
+  </p>
+
+  <!-- Video Section -->
   <div class="video-container">
-    <h1 id="video-title">Video Title</h1>
-    <h2 id="video-subtitle">Video Subtitle</h2>
+    <h2>Watch a YouTube Sample or an External Video</h2>
+    <p>Select a video type to watch either a sample YouTube video or an external `.mp4` video.</p>
 
     <div class="dropdown-container">
       <select id="video-type">
-        <option value="youtube">YouTube</option>
-        <option value="external">External Video</option>
+        <option value="youtube">YouTube Video</option>
+        <option value="external">External MP4 Video</option>
       </select>
-      <input type="text" id="video-link" placeholder="Enter video link here..." />
-      <button id="play-btn">Play</button>
     </div>
 
     <video id="player" controls></video>
   </div>
 
+  <p>
+    Over the years, YouTube has evolved beyond just a platform for personal video sharing. It has given rise to a new type 
+    of celebrity — the YouTuber. Many content creators have gained massive followings, earning income through ads, sponsorships, 
+    and merchandise. Some YouTubers even transition into mainstream media, further blurring the lines between traditional and 
+    digital entertainment.
+  </p>
+
+  <p>
+    As technology continues to evolve, so does YouTube. With features like live streaming, monetization options, and YouTube 
+    Shorts, the platform shows no signs of slowing down. It continues to be a space where creativity, entertainment, and 
+    education collide.
+  </p>
+
   <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
   <script>
     const player = new Plyr('#player');
-    const playButton = document.getElementById('play-btn');
     const videoTypeSelect = document.getElementById('video-type');
-    const videoLinkInput = document.getElementById('video-link');
-    const videoTitle = document.getElementById('video-title');
-    const videoSubtitle = document.getElementById('video-subtitle');
 
-    playButton.addEventListener('click', function() {
+    // Default YouTube and external video URLs
+    const youtubeVideo = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';  // Sample YouTube Video
+    const externalVideo = 'https://www.w3schools.com/html/mov_bbb.mp4';  // Sample MP4 Video
+
+    // Load the default YouTube video on page load
+    player.source = {
+      type: 'video',
+      sources: [{
+        src: youtubeVideo,
+        provider: 'youtube'
+      }]
+    };
+
+    videoTypeSelect.addEventListener('change', function() {
       const videoType = videoTypeSelect.value;
-      const videoLink = videoLinkInput.value.trim();
-
-      if (!videoLink) {
-        alert('Please enter a video link.');
-        return;
-      }
 
       if (videoType === 'youtube') {
+        // Load the YouTube video
         player.source = {
           type: 'video',
           sources: [{
-            src: videoLink,
+            src: youtubeVideo,
             provider: 'youtube'
           }]
         };
-        videoTitle.textContent = 'Playing YouTube Video';
-        videoSubtitle.textContent = 'Now streaming from YouTube...';
       } else if (videoType === 'external') {
+        // Load the external MP4 video
         player.source = {
           type: 'video',
           sources: [{
-            src: videoLink,
+            src: externalVideo,
             type: 'video/mp4'
           }]
         };
-        videoTitle.textContent = 'Playing External Video';
-        videoSubtitle.textContent = 'Now streaming from external source...';
       }
     });
   </script>
+
 </body>
 </html>
