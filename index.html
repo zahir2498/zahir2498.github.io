@@ -10,23 +10,15 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            text-align: center;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
+        /* Player Styling */
         .player-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            width: 50%; /* Width of the player */
+            margin: 30px auto; /* Center the player */
+            padding-bottom: 30%; /* Reduced height for the player */
             height: 0;
-            overflow: hidden;
-            margin: 20px;
             background-color: #000;
         }
 
@@ -38,35 +30,45 @@
             height: 100%;
         }
 
+        /* Text Styling */
+        .text-section {
+            margin: 0 10px; /* Small left and right margins */
+            padding: 20px; /* Add padding around the text */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+
         h1, h2 {
             color: #333;
+            text-align: center;
         }
 
         p {
-            text-align: justify;
             color: #555;
+            margin: 10px 20px;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
 </head>
 <body>
 
-    <div class="container">
-        <!-- Video Player -->
-        <div class="player-wrapper">
-            <!-- YouTube Video Embed -->
-            <iframe id="youtube-player" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            
-            <!-- Or, for an MP4 video, use this instead -->
-            <!-- 
-            <video id="mp4-player" controls>
-                <source src="your-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            -->
-        </div>
+    <!-- Video Player -->
+    <div class="player-wrapper">
+        <!-- YouTube Video Embed -->
+        <iframe id="youtube-player" src="https://www.youtube.com/embed/u3HZ8smiUPs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        
+        <!-- Or, for an MP4 video, use this instead -->
+        <!-- 
+        <video id="mp4-player" controls>
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        -->
+    </div>
 
-        <!-- Heading and Subheading -->
+    <!-- Text Section -->
+    <div class="text-section">
         <h1>Understanding YouTube</h1>
         <h2>The World's Leading Video Platform</h2>
 
