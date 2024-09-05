@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Video Player</title>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .video-container {
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .video-container h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .video-container h2 {
+      font-size: 24px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-container {
+      margin-bottom: 20px;
+    }
+
+    select, input {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .plyr__video-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-container">
+    <h1 id="video-title">Video Title</h1>
+    <h2 id="video-subtitle">Video Subtitle</h2>
+
+    <div class="dropdown-container">
+      <select id="video-type">
+        <option value="youtube">YouTube</option>
+        <option value="external">External Video</option>
+      </select>
+      <input type="text" id="video-link" placeholder="Enter video link here..." />
+      <button id="play-btn">Play</button>
+    </div>
+
+    <video id="player" controls></video>
+  </div>
+
+  <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
+  <script>
+    const player = new Plyr('#player');
+    const playButton = document.getElementById('play-btn');
+    const videoTypeSelect = document.getElementById('video-type');
+    const videoLinkInput = document.getElementById('video-link');
+    const videoTitle = document.getElementById('video-title');
+    const videoSubtitle = document.getElementById('video-subtitle');
+
+    playButton.addEventListener('click', function() {
+      const videoType = videoTypeSelect.value;
+      const videoLink = videoLinkInput.value.trim();
+
+      if (!videoLink) {
+        alert('Please enter a video link.');
+        return;
+      }
+
+      if (videoType === 'youtube') {
+        player.source = {
+          type: 'video',
+          sources: [{
+            src: videoLink,
+            provider: 'youtube'
+          }]
+        };
+        videoTitle.textContent = 'Playing YouTube Video';
+        videoSubtitle.textContent = 'Now streaming from YouTube...';
+      } else if (videoType === 'external') {
+        player.source = {
+          type: 'video',
+          sources: [{
+            src: videoLink,
+            type: 'video/mp4'
+          }]
+        };
+        videoTitle.textContent = 'Playing External Video';
+        videoSubtitle.textContent = 'Now streaming from external source...';
+      }
+    });
+  </script>
+</body>
+</html>
