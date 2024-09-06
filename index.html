@@ -24,7 +24,7 @@
         .player-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; /* Default 16:9 Aspect Ratio */
             height: 0;
             background-color: #000;
             margin-bottom: 40px;
@@ -39,12 +39,13 @@
             border: none;
         }
 
-        /* Heading and text styling */
+        /* Text Section Styling */
         .text-section {
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            margin: 0 auto; /* Center the text section */
         }
 
         h1 {
@@ -68,8 +69,25 @@
             text-align: justify;
         }
 
-        /* Responsive design */
+        /* Responsive design for desktop */
+        @media (min-width: 769px) {
+            .player-wrapper {
+                max-width: 50%; /* Limit to half the screen width on larger devices */
+                margin: 0 auto 40px auto; /* Center the player */
+                padding-bottom: 28%; /* Reduce height to adjust aspect ratio on desktop */
+            }
+
+            .text-section {
+                max-width: 80%; /* Reduce width of the text section */
+            }
+        }
+
+        /* Tablet and smaller devices */
         @media (max-width: 768px) {
+            .text-section {
+                margin: 0 20px;
+            }
+
             h1 {
                 font-size: 1.8rem;
             }
@@ -83,6 +101,7 @@
             }
         }
 
+        /* Mobile design */
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.5rem;
