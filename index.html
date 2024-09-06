@@ -3,85 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player with YouTube Information</title>
+    <title>Responsive YouTube Player</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            line-height: 1.6;
         }
 
-        /* Player Styling */
+        /* Container for player and content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Player Wrapper Styling */
         .player-wrapper {
             position: relative;
-            width: 50%; /* Width of the player */
-            margin: 30px auto; /* Center the player */
-            padding-bottom: 28%; /* Reduced height for the player */
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             background-color: #000;
+            margin-bottom: 40px;
         }
 
-        .player-wrapper iframe, .player-wrapper video {
+        .player-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            border: none;
         }
 
-        /* Text Styling */
+        /* Heading and text styling */
         .text-section {
-            margin: 0 50px; /* Small left and right margins */
-            padding: 20px; /* Add padding around the text */
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: justify;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
-        h1, h2 {
+        h1 {
             color: #333;
             text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #555;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
 
         p {
-            color: #555;
-            margin: 10px 20px;
+            color: #777;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
 </head>
 <body>
 
-    <!-- Video Player -->
-    <div class="player-wrapper">
-        <!-- YouTube Video Embed -->
-        <iframe id="youtube-player" src="https://www.youtube.com/embed/u3HZ8smiUPs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        
-       
+    <!-- Container -->
+    <div class="container">
+        <!-- Video Player -->
+        <div class="player-wrapper">
+            <!-- Responsive YouTube Video Embed -->
+            <iframe src="https://www.youtube.com/embed/u3HZ8smiUPs" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <!-- Text Section -->
+        <div class="text-section">
+            <h1>Understanding YouTube</h1>
+            <h2>The World's Leading Video Platform</h2>
+            <p>
+                YouTube is a global video-sharing platform created in 2005 and acquired by Google in 2006. It allows users to upload, view, and share videos with a vast audience. YouTube has become an essential part of the internet, hosting a variety of content, from educational tutorials and entertainment to music videos, vlogs, and live streams.
+            </p>
+            <p>
+                One of YouTube's key successes is its accessibility. The platform is available to anyone with an internet connection, allowing users to upload and view videos for free. With its powerful recommendation algorithm, YouTube suggests content based on users' viewing habits, making the platform highly engaging and addictive.
+            </p>
+            <p>
+                YouTube is also a major monetization platform for creators. Through the YouTube Partner Program, creators can earn revenue by displaying ads on their videos, helping them build full-time careers as content creators. Integrated with Google's services, YouTube is a cornerstone of online media today.
+            </p>
+        </div>
     </div>
 
-    <!-- Text Section -->
-    <div class="text-section">
-        <h1>Understanding YouTube</h1>
-        <h2>The World's Leading Video Platform</h2>
-
-        <!-- About YouTube -->
-        <p>
-            YouTube is a global video-sharing platform that was created in 2005 and acquired by Google in 2006. It allows users to upload, view, and share videos with a broad audience. YouTube has become a cornerstone of the internet, hosting content from educational tutorials and entertainment to music videos, vlogs, and live streams. 
-        </p>
-        <p>
-            One of the key reasons for YouTube's success is its accessibility. The platform can be used by anyone with an internet connection, and users can upload videos without any cost. Additionally, YouTube's algorithm is designed to promote engaging content, offering personalized recommendations based on user viewing habits. This keeps users returning to the site regularly.
-        </p>
-        <p>
-            YouTube is also a monetization platform for creators. Through the YouTube Partner Program, content creators can earn revenue from ads placed on their videos. This has allowed millions of users to create careers as "YouTubers." The platform’s reach is further extended through its integration with Google services, making it a significant part of online media consumption today.
-        </p>
-    </div>
-
-    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
-    <script>
-        const player = new Plyr('#youtube-player');
-        
-    </script>
 </body>
 </html>
