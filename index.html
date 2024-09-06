@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube and MP4 Video in Plyr</title>
+    <title>Video Player with YouTube Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
 
         /* Text Styling */
         .text-section {
-            margin: 0 10px; /* Small left and right margins */
+            margin: 0 50px; /* Small left and right margins */
             padding: 20px; /* Add padding around the text */
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -55,17 +55,16 @@
 
     <!-- Video Player -->
     <div class="player-wrapper">
-        <!-- Plyr for YouTube -->
-       
-        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="u3HZ8smiUPs"></div> 
-
+        <!-- YouTube Video Embed -->
+        <iframe id="youtube-player" src="https://www.youtube.com/embed/u3HZ8smiUPs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         
+       
     </div>
 
     <!-- Text Section -->
     <div class="text-section">
-        <h1>Heading</h1>
-        <h2>heading sub</h2>
+        <h1>Understanding YouTube</h1>
+        <h2>The World's Leading Video Platform</h2>
 
         <!-- About YouTube -->
         <p>
@@ -79,13 +78,10 @@
         </p>
     </div>
 
-    <!-- Plyr JS -->
     <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
     <script>
+        const player = new Plyr('#youtube-player');
         
-         const player = new Plyr('#player');
-
-       
     </script>
 </body>
 </html>
