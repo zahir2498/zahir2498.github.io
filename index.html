@@ -3,145 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive YouTube Player</title>
+    <title>Think Again - Audio Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            line-height: 1.6;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* Container for player and content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             padding: 20px;
         }
-
-        /* Player Wrapper Styling */
-        .player-wrapper {
-            position: relative;
+        
+        .audio-player {
             width: 100%;
-            padding-bottom: 56.25%; /* Default 16:9 Aspect Ratio */
-            height: 0;
-            background-color: #000;
-            margin-bottom: 40px;
+            max-width: 500px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
         }
-
-        .player-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        
+        .banner {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .banner img {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-
-        /* Text Section Styling */
-        .text-section {
-            background-color: #fff;
+        
+        .banner:hover img {
+            transform: scale(1.05);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin: 0 auto; /* Center the text section */
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
         }
-
-        h1 {
-            color: #333;
+        
+        .banner-overlay h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .banner-overlay p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+        
+        .player-controls {
+            padding: 25px;
+        }
+        
+        .chapter-info {
             text-align: center;
-            font-size: 2rem;
             margin-bottom: 20px;
         }
-
-        h2 {
-            color: #555;
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+        
+        .chapter-info h3 {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 5px;
         }
-
-        p {
-            color: #777;
-            font-size: 1rem;
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
             margin-bottom: 15px;
-            text-align: justify;
+            cursor: pointer;
+            overflow: hidden;
         }
-
-        /* Responsive design for desktop */
-        @media (min-width: 769px) {
-            .player-wrapper {
-                max-width: 50%; /* Limit to half the screen width on larger devices */
-                margin: 0 auto 40px auto; /* Center the player */
-                padding-bottom: 28%; /* Reduce height to adjust aspect ratio on desktop */
-            }
-
-            .text-section {
-                max-width: 40%; /* Reduce width of the text section */
-            }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #6e8efb, #a777e3);
+            border-radius: 10px;
+            width: 20%;
+            transition: width 0.2s ease;
         }
-
-        /* Tablet and smaller devices */
-        @media (max-width: 768px) {
-            .text-section {
-                margin: 0 20px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-            }
-
-            p {
-                font-size: 0.95rem;
-            }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+            font-weight: 500;
         }
-
-        /* Mobile design */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
+        
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-play {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            box-shadow: 0 5px 15px rgba(106, 142, 251, 0.4);
+        }
+        
+        .btn-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(106, 142, 251, 0.6);
+        }
+        
+        .btn-play i {
+            color: white;
+            font-size: 26px;
+        }
+        
+        .btn-skip {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            font-weight: bold;
+            font-size: 20px;
+            color: #555;
+        }
+        
+        .btn-skip:hover {
+            background: #e0e0e0;
+            transform: scale(1.1);
+        }
+        
+        .btn-speed {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-speed:hover {
+            background: #e0e0f0;
+            transform: translateY(-2px);
+        }
+        
+        .volume-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 25px;
+        }
+        
+        .volume-icon {
+            color: #666;
+            font-size: 20px;
+        }
+        
+        .volume-slider {
+            flex: 1;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #6e8efb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: #5a7df9;
+            transform: scale(1.2);
+        }
+        
+        .speed-display {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
-
-    <!-- Container -->
-    <div class="container">
-        <!-- Video Player -->
-        <div class="player-wrapper">
-            <!-- Responsive YouTube Video Embed -->
-            <iframe src="https://www.youtube.com/embed/u3HZ8smiUPs" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="audio-player">
+        <div class="banner">
+            <img id="banner-image" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Audio Book Banner">
+            <div class="banner-overlay">
+                <h2 id="audio-title">Think Again</h2>
+                <p id="audio-author">Written by Adam Grant | Narrated by Adam Grant</p>
+            </div>
         </div>
-
-        <!-- Text Section -->
-        <div class="text-section">
-            <h1>Understanding YouTube</h1>
-            <h2>The World's Leading Video Platform</h2>
-            <p>
-                YouTube is a global video-sharing platform created in 2005 and acquired by Google in 2006. It allows users to upload, view, and share videos with a vast audience. YouTube has become an essential part of the internet, hosting a variety of content, from educational tutorials and entertainment to music videos, vlogs, and live streams.
-            </p>
-            <p>
-                One of YouTube's key successes is its accessibility. The platform is available to anyone with an internet connection, allowing users to upload and view videos for free. With its powerful recommendation algorithm, YouTube suggests content based on users' viewing habits, making the platform highly engaging and addictive.
-            </p>
-            <p>
-                YouTube is also a major monetization platform for creators. Through the YouTube Partner Program, creators can earn revenue by displaying ads on their videos, helping them build full-time careers as content creators. Integrated with Google's services, YouTube is a cornerstone of online media today.
-            </p>
+        
+        <div class="player-controls">
+            <div class="chapter-info">
+                <h3>Think Again: The Power of Knowing What You Don't Know: Intro</h3>
+            </div>
+            
+            <div class="time-display">
+                <span id="current-time">00:00:00</span>
+                <span id="duration">00:00:00</span>
+            </div>
+            
+            <div class="progress-container" id="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="controls-row">
+                <button class="btn btn-skip" id="backward" title="Skip Back 15s">
+                    <i class="fas fa-backward"></i>
+                </button>
+                
+                <button class="btn btn-play" id="play">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
+                
+                <button class="btn btn-skip" id="forward" title="Skip Forward 15s">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+            
+            <div class="controls-row">
+                <button class="btn btn-speed" id="speed-btn">
+                    <i class="fas fa-running"></i> 1.0x
+                </button>
+                
+                <div class="volume-controls">
+                    <i class="fas fa-volume-high volume-icon"></i>
+                    <input type="range" class="volume-slider" id="volume" min="0" max="1" step="0.01" value="0.7">
+                </div>
+            </div>
         </div>
+        
+        <audio id="audio"></audio>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const audio = document.getElementById('audio');
+            const playBtn = document.getElementById('play');
+            const playIcon = document.getElementById('play-icon');
+            const backwardBtn = document.getElementById('backward');
+            const forwardBtn = document.getElementById('forward');
+            const progressContainer = document.getElementById('progress-container');
+            const progress = document.getElementById('progress');
+            const currentTimeEl = document.getElementById('current-time');
+            const durationEl = document.getElementById('duration');
+            const volumeSlider = document.getElementById('volume');
+            const speedBtn = document.getElementById('speed-btn');
+            
+            // Playback speeds
+            const speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+            let currentSpeedIndex = 2; // Start at 1.0x
+            
+            // Set audio source
+            audio.src = "https://cdn001.milotree.com/files/9d949c3d8baa0f9df6f22c4661946a61/2763/AUDIOBOOK-BusyMansFitness.mp3";
+            
+            // Play/Pause
+            function togglePlay() {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                } else {
+                    audio.pause();
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                }
+            }
+            
+            // Update progress
+            function updateProgress() {
+                const { duration, currentTime } = audio;
+                if (isNaN(duration)) return;
+                
+                // Update progress bar width
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = `${progressPercent}%`;
+                
+                // Update time displays
+                const formatTime = (time) => {
+                    const hours = Math.floor(time / 3600);
+                    const minutes = Math.floor((time % 3600) / 60);
+                    const seconds = Math.floor(time % 60);
+                    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                };
+                
+                currentTimeEl.textContent = formatTime(currentTime);
+                
+                if (!isNaN(duration)) {
+                    durationEl.textContent = formatTime(duration);
+                }
+            }
+            
+            // Set progress
+            function setProgress(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                audio.currentTime = (clickX / width) * duration;
+            }
+            
+            // Skip forward/backward
+            function skip(direction) {
+                audio.currentTime += direction;
+            }
+            
+            // Handle volume
+            function setVolume() {
+                audio.volume = volumeSlider.value;
+            }
+            
+            // Change playback speed
+            function changeSpeed() {
+                currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+                const newSpeed = speeds[currentSpeedIndex];
+                audio.playbackRate = newSpeed;
+                speedBtn.innerHTML = `<i class="fas fa-running"></i> ${newSpeed.toFixed(2)}x`;
+            }
+            
+            // Event listeners
+            playBtn.addEventListener('click', togglePlay);
+            audio.addEventListener('timeupdate', updateProgress);
+            progressContainer.addEventListener('click', setProgress);
+            backwardBtn.addEventListener('click', () => skip(-15));
+            forwardBtn.addEventListener('click', () => skip(15));
+            volumeSlider.addEventListener('input', setVolume);
+            speedBtn.addEventListener('click', changeSpeed);
+            
+            // Initialize volume and speed
+            audio.volume = volumeSlider.value;
+            audio.playbackRate = speeds[currentSpeedIndex];
+            
+            // Update duration when metadata is loaded
+            audio.addEventListener('loadedmetadata', function() {
+                const formatTime = (time) => {
+                    const hours = Math.floor(time / 3600);
+                    const minutes = Math.floor((time % 3600) / 60);
+                    const seconds = Math.floor(time % 60);
+                    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                };
+                
+                if (!isNaN(audio.duration)) {
+                    durationEl.textContent = formatTime(audio.duration);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
