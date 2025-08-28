@@ -20,13 +20,14 @@
     .player-container {
       text-align: center;
       width: 100%;
-      max-width: 600px; /* wider for long progress bar */
+      max-width: 600px;
       padding: 20px;
+      position: relative;
     }
 
     .cover img {
-      width: 260px;   /* bigger image */
-      height: 260px;
+      width: 320px;   /* Bigger cover image */
+      height: 320px;
       border-radius: 12px;
       box-shadow: 0 6px 25px rgba(0,0,0,0.5);
       margin-bottom: 25px;
@@ -52,7 +53,7 @@
 
     .progress-bar {
       flex: 1;
-      height: 8px; /* slightly thicker */
+      height: 8px;
       background: rgba(255,255,255,0.25);
       border-radius: 5px;
       margin: 0 15px;
@@ -93,28 +94,30 @@
       font-size: 34px;
     }
 
-    .bottom-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      margin-top: 15px;
-    }
-
+    /* Volume bottom-left */
     .volume {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
       display: flex;
       align-items: center;
       gap: 5px;
+      font-size: 14px;
     }
 
     .volume input {
-      width: 120px;
+      width: 100px;
     }
 
+    /* Speed bottom-right */
     .speed-control {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
       display: flex;
       align-items: center;
       gap: 5px;
+      font-size: 14px;
     }
 
     .speed-control button {
@@ -149,16 +152,17 @@
       <button id="forward"><i class="fas fa-redo"></i></button>
     </div>
 
-    <div class="bottom-controls">
-      <div class="volume">
-        <i class="fas fa-volume-up"></i>
-        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
-      </div>
-      <div class="speed-control">
-        <button id="speed-down">-</button>
-        <span id="speed-display">1.0x</span>
-        <button id="speed-up">+</button>
-      </div>
+    <!-- Bottom Left: Volume -->
+    <div class="volume">
+      <i class="fas fa-volume-up"></i>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+    </div>
+
+    <!-- Bottom Right: Speed -->
+    <div class="speed-control">
+      <button id="speed-down">-</button>
+      <span id="speed-display">1.0x</span>
+      <button id="speed-up">+</button>
     </div>
   </div>
 
