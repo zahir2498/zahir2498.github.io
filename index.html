@@ -3,62 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compact Audio Player</title>
+  <title>Audiobook Player</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #1a1a40, #0d0d26); /* First player background */
-      color: #fff;
+      background: linear-gradient(to bottom, #0f1740, #1c225c);
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
-    .player {
+    .player-container {
       text-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      max-width: 320px;
-    }
-
-    .player img {
-      width: 220px;   /* Bigger image */
-      height: 220px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: #bbb;
-      margin-bottom: 15px;
-    }
-
-    audio {
       width: 100%;
-      outline: none;
+      max-width: 600px; /* wider for long progress bar */
+      padding: 20px;
+    }
+
+    .cover img {
+      width: 260px;   /* bigger image */
+      height: 260px;
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 15px;
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 8px; /* slightly thicker */
+      background: rgba(255,255,255,0.25);
+      border-radius: 5px;
+      margin: 0 15px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #ff0057;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin: 25px 0;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 30px;
+      color: white;
+    }
+
+    .controls .play-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #ff0057;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+    }
+
+    .bottom-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .volume {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .volume input {
+      width: 120px;
+    }
+
+    .speed-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .speed-control button {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="player">
-    <img src="c.jpg" alt="Cover">
-    <div class="title">Think Again</div>
-    <div class="subtitle">Written & Narrated by Adam Grant</div>
-    <audio controls>
-      <source src="https://cdn001.milotree.com/files/9d949c3d8baa0f9df6f22c4661946a61/2763/AUDIOBOOK-BusyMansFitness.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+  <div class="player-container">
+    <div class="cover">
+      <img src="c.jpg" alt="Cover">
+    </div>
+    <h2>Think Again</h2>
+    <p>Written by Adam Grant | Narrated by Adam Grant</p>
+
+    <div class="progress-container">
+      <span id="current-time">00:00</span>
+      <div class="progress-bar" id="progress-container">
+        <div class="progress" id="progress"></div>
+      </div>
+      <span id="duration">00:00</span>
+    </div>
+
+    <div class="controls">
+      <button id="backward"><i class="fas fa-undo"></i></button>
+      <button class="play-btn" id="play"><i class="fas fa-play" id="play-icon"></i></button>
+      <button id="forward"><i class="fas fa-redo"></i></button>
+    </div>
+
+    <div class="bottom-controls">
+      <div class="volume">
+        <i class="fas fa-volume-up"></i>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+      </div>
+      <div class="speed-control">
+        <button id="speed-down">-</button>
+        <span id="speed-display">1.0x</span>
+        <button id="speed-up">+</button>
+      </div>
+    </div>
   </div>
+
+  <audio id="audio" src="https://cdn001.milotree.com/files/9d949c3d8baa0f9df6f22c4661946a61/2763/AUDIOBOOK-BusyMansFitness.mp3"></audio>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("play");
+    const playIcon = document.getElementById("play-icon");
+    const progress = document.getElementById("progress");
+    const progressContainer = document.getElementById("progress-container");
+    const currentTimeEl = document.getElementById("current-time");
+    const durationEl = document.getElementById("duration");
+    const volumeSlider = document.getElementById("volume");
+    const speedDisplay = document.getElementById("speed-display");
+    const speedUp = document.getElementById("speed-up");
+    const speedDown = document.getElementById("speed-down");
+
+    let playbackSpeed = 1.0;
+
+    // Play/Pause
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playIcon.classList.replace("fa-play", "fa-pause");
+      } else {
+        audio.pause();
+        playIcon.classList.replace("fa-pause", "fa-play");
+      }
+    });
+
+    // Update progress
+    audio.addEventListener("timeupdate", () => {
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = `${progressPercent}%`;
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    // Seek
+    progressContainer.addEventListener("click", (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      audio.currentTime = (clickX / width) * audio.duration;
+    });
+
+    // Volume
+    volumeSlider.addEventListener("input", () => {
+      audio.volume = volumeSlider.value;
+    });
+
+    // Speed controls
+    function updateSpeed() {
+      audio.playbackRate = playbackSpeed;
+      speedDisplay.textContent = `${playbackSpeed.toFixed(1)}x`;
+    }
+    speedUp.addEventListener("click", () => {
+      playbackSpeed = Math.min(playbackSpeed + 0.25, 2.0);
+      updateSpeed();
+    });
+    speedDown.addEventListener("click", () => {
+      playbackSpeed = Math.max(playbackSpeed - 0.25, 0.5);
+      updateSpeed();
+    });
+
+    // Format time
+    function formatTime(time) {
+      if (isNaN(time)) return "00:00";
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    }
+  </script>
 </body>
 </html>
