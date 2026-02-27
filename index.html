@@ -42,11 +42,6 @@ align-items:center;
 justify-content:center;
 margin:0 auto 16px;
 cursor:pointer;
-transition:all .2s;
-}
-
-.play-btn:hover{
-border-color:#007aff;
 }
 
 /* PROGRESS BAR */
@@ -80,24 +75,25 @@ margin-top:-5px;
 
 .loop-region{
 position:absolute;
-top:0;
+top:50%;
+transform:translateY(-50%);
 height:6px;
 background:rgba(0,122,255,0.25);
 border-radius:3px;
 display:none;
 }
 
-/* CLEAN BLUE MARKERS */
+/* MARKERS */
 
 .marker{
 position:absolute;
-top:-4px;
-width:4px;
-height:14px;
+top:50%;
+transform:translate(-50%,-50%);
+width:3px;
+height:16px;
 background:#007aff;
 border-radius:2px;
 display:none;
-box-shadow:0 0 0 2px #fff;
 }
 
 /* TIME */
@@ -127,20 +123,12 @@ border-radius:8px;
 background:#f9f9f9;
 font-size:14px;
 cursor:pointer;
-transition:.2s;
-}
-
-.btn:hover{
-border-color:#007aff;
-color:#007aff;
 }
 
 select{
 padding:6px 10px;
 border-radius:6px;
 border:1px solid #ccc;
-background:#fff;
-cursor:pointer;
 }
 
 </style>
@@ -257,8 +245,6 @@ speedSelect.onchange=()=>{
 audio.playbackRate=parseFloat(speedSelect.value)
 }
 
-/* SET MARKERS */
-
 setA.onclick=()=>{
 markerA=audio.currentTime
 updateMarker(markerA,markerAEl)
@@ -279,17 +265,14 @@ markerBEl.style.display="none"
 loopRegion.style.display="none"
 }
 
-/* MARKER POSITION */
-
 function updateMarker(time,el){
 
 const percent=(time/audio.duration)*100
+
 el.style.left=percent+"%"
 el.style.display="block"
 
 }
-
-/* LOOP REGION */
 
 function updateRegion(){
 
