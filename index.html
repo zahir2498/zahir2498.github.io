@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Automatic Spanish Loop</title>
 
 <style>
@@ -10,16 +13,16 @@ body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 background:#f5f6f7;
 margin:0;
-padding:40px;
+padding:20px;
 display:flex;
 justify-content:center;
 }
 
 .container{
-max-width:800px;
+max-width:850px;
 width:100%;
 background:white;
-padding:30px;
+padding:25px;
 border-radius:14px;
 box-shadow:0 6px 20px rgba(0,0,0,0.08);
 }
@@ -27,8 +30,15 @@ box-shadow:0 6px 20px rgba(0,0,0,0.08);
 /* PLAYER */
 
 .player{
+background:#fff;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+padding:20px;
 text-align:center;
-margin-bottom:35px;
+width:100%;
+max-width:360px;
+margin:auto;
+margin-bottom:30px;
 }
 
 .play-btn{
@@ -36,9 +46,9 @@ width:70px;
 height:70px;
 border-radius:50%;
 border:2px solid #ccc;
-background:white;
+background:#fff;
 color:#007aff;
-font-size:30px;
+font-size:32px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -47,66 +57,115 @@ cursor:pointer;
 }
 
 .progress{
+-webkit-appearance:none;
 width:100%;
 height:5px;
-margin:12px 0;
+border-radius:2px;
+background:#e5e5e5;
+outline:none;
+margin:10px 0;
+}
+
+.progress::-webkit-slider-thumb{
+-webkit-appearance:none;
+width:16px;
+height:16px;
+border-radius:50%;
+background:#007aff;
+cursor:pointer;
+margin-top:-6px;
 }
 
 .time{
 display:flex;
 justify-content:space-between;
-font-size:12px;
+font-size:13px;
 color:#555;
 }
 
 .controls{
 margin-top:12px;
 display:flex;
+flex-wrap:wrap;
 justify-content:center;
-gap:10px;
+gap:8px;
 }
 
 .btn{
-padding:7px 16px;
-border-radius:8px;
+padding:8px 14px;
 border:1px solid #ccc;
-background:#fafafa;
+border-radius:8px;
+background:#f9f9f9;
+font-size:14px;
 cursor:pointer;
 }
 
-/* CONTENT */
-
-h2{
-margin-top:25px;
-color:#222;
+.section{
+margin-bottom:28px;
 }
 
-.section{
-margin-bottom:25px;
-line-height:1.6;
+h2{
+font-size:22px;
+margin-top:25px;
+}
+
+p{
+font-size:17px;
+line-height:1.7;
 }
 
 .vocab{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
+gap:10px;
 margin-top:10px;
 }
 
 .card{
-background:#f3f3f3;
-padding:8px;
-border-radius:6px;
+background:#f4f4f4;
+padding:10px;
+border-radius:8px;
+font-size:16px;
 }
 
 .quiz{
 background:#f9fafb;
-padding:15px;
-border-radius:10px;
+padding:18px;
+border-radius:12px;
+font-size:17px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.container{
+padding:18px;
+}
+
+h2{
+font-size:20px;
+}
+
+p{
+font-size:18px;
+}
+
+.vocab{
+grid-template-columns:1fr;
+}
+
+.play-btn{
+width:80px;
+height:80px;
+font-size:36px;
+}
+
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -121,12 +180,15 @@ border-radius:10px;
 
 <div class="time">
 <span id="current">0:00</span>
-<span id="duration">0:08</span>
+<span id="duration">0:00</span>
 </div>
 
 <div class="controls">
-<button class="btn" id="loopBtn">Loop ON</button>
+<button class="btn" id="loopBtn">Loop OFF</button>
 <button class="btn" id="speedBtn">1x</button>
+<button class="btn" id="setA">Set A</button>
+<button class="btn" id="setB">Set B</button>
+<button class="btn" id="clearAB">Clear A-B</button>
 </div>
 
 <audio id="audio" src="/audio/loop_000001.wav"></audio>
@@ -134,176 +196,84 @@ border-radius:10px;
 </div>
 
 
-<!-- TRANSCRIPTION -->
+<!-- LESSON -->
 
 <div class="section">
 <h2>1. Transcription</h2>
-<p>
-O a veces le cae a uno encima. Y ahí es fractura… asegurada.
-</p>
+<p>O a veces le cae a uno encima. Y ahí es fractura… asegurada.</p>
 </div>
 
-
-<!-- PHONETICS -->
 
 <div class="section">
 <h2>2. Phonetics</h2>
-<p>
-Oh ah beh-ses | leh kah-eh | ah oo-no | en-see-mah. | Yah-ee es | frahk-too-rah… | ah-seh-goo-rah-dah.
-</p>
+<p>Oh ah beh-ses | leh kah-eh | ah oo-no | en-see-mah. | Yah-ee es | frahk-too-rah… | ah-seh-goo-rah-dah.</p>
 </div>
 
-
-<!-- TRANSLATION -->
 
 <div class="section">
 <h2>3. Translation</h2>
-<p>
-Or sometimes it falls right on top of you. At that point it’s a fracture… guaranteed.
-</p>
+<p>Or sometimes it falls right on top of you. At that point it’s a fracture… guaranteed.</p>
 </div>
 
-
-<!-- CONTEXT -->
 
 <div class="section">
 <h2>4. Contextual Explanation</h2>
-
 <p>
-The line is a warning: if something heavy drops on a person, the result is basically a guaranteed broken bone. 
+The line is a warning: if something heavy drops on a person, the result is basically a guaranteed broken bone.
 The pause before <b>asegurada</b> adds emphasis, like “…yup, for sure.”
 </p>
-
 </div>
 
-
-<!-- CONTEXT VOCAB -->
 
 <div class="section">
 <h2>5. Contextual Vocab</h2>
 
 <div class="vocab">
-
 <div class="card">a veces — sometimes</div>
 <div class="card">le cae — it falls on (someone)</div>
-<div class="card">a uno — on one / on you (general)</div>
+<div class="card">a uno — on one / on you</div>
 <div class="card">encima — on top (of)</div>
 <div class="card">ahí — there / then</div>
 <div class="card">fractura — fracture</div>
 <div class="card">asegurada — guaranteed</div>
-
 </div>
 
 </div>
 
-
-<!-- GRAMMAR -->
-
-<div class="section">
-<h2>6. Grammar</h2>
-
-<p>
-This line shows how Spanish often talks about accidents in an impersonal way. 
-Instead of saying “the ladder fell on me,” the speaker says <b>le cae a uno encima</b> — literally 
-“it falls on one.”
-</p>
-
-<p>
-The word <b>le</b> marks the person affected, while <b>a uno</b> makes it general (“on you / on a person”). 
-<b>Y ahí</b> works as a connector meaning “and that’s when,” setting up the result:
-<b>es fractura asegurada</b> = “it’s a guaranteed fracture.”
-</p>
-
-<p>
-Verb tense: <b>cae</b> is the present tense of <i>caer</i> (“to fall”), third person singular — “it falls.” 
-It’s used here to describe what can happen generally.
-</p>
-
-</div>
-
-
-<!-- LITERAL VOCAB -->
-
-<div class="section">
-<h2>7. Literal Vocab</h2>
-
-<div class="vocab">
-
-<div class="card">O = or</div>
-<div class="card">a veces = sometimes</div>
-<div class="card">le = to him/her/you</div>
-<div class="card">cae = falls</div>
-<div class="card">a uno = on one / on you</div>
-<div class="card">encima = on top (of)</div>
-<div class="card">Y ahí = and then</div>
-<div class="card">es = is</div>
-<div class="card">fractura = fracture</div>
-<div class="card">asegurada = guaranteed</div>
-
-</div>
-
-</div>
-
-
-<!-- TAGS -->
-
-<div class="section">
-<h2>8. Tags</h2>
-
-<p>
-o, veces, le, cae, uno, encima, ahí, fractura, asegurada
-</p>
-
-</div>
-
-
-<!-- CORE EXERCISE -->
-
-<div class="section">
-
-<h2>Core Exercise</h2>
-
-<ul>
-<li><b>Listen</b> → Play the loop 100 times (~14 minutes).</li>
-<li><b>Mimic</b> → Speak the loop at least 10 times.</li>
-<li><b>Write</b> → Copy the transcription once.</li>
-<li><b>Cards</b> → Make flashcards for each vocab word.</li>
-<li><b>Cycle</b> → Listen → Mimic → Write → Review.</li>
-</ul>
-
-</div>
-
-
-<!-- QUIZ -->
 
 <div class="quiz">
 
 <h2>Vocab Quiz</h2>
 
-<p>1. In this loop, what word was used to say <b>"on top (of)"</b>?</p>
+<p>1. In this loop, what word means <b>"on top (of)"</b>?</p>
 
-<p>2. In this loop, what word was used to say <b>"fracture"</b>?</p>
+<p>2. In this loop, what word means <b>"fracture"</b>?</p>
 
-<p>3. In this loop, what word was used to say <b>"guaranteed"</b>?</p>
+<p>3. In this loop, what word means <b>"guaranteed"</b>?</p>
 
 </div>
-
 
 </div>
 
 
 <script>
 
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-const current = document.getElementById("current");
-const duration = document.getElementById("duration");
-const loopBtn = document.getElementById("loopBtn");
-const speedBtn = document.getElementById("speedBtn");
+const audio=document.getElementById("audio");
+const playBtn=document.getElementById("playBtn");
+const progress=document.getElementById("progress");
+const current=document.getElementById("current");
+const duration=document.getElementById("duration");
+const loopBtn=document.getElementById("loopBtn");
+const speedBtn=document.getElementById("speedBtn");
+const setA=document.getElementById("setA");
+const setB=document.getElementById("setB");
+const clearAB=document.getElementById("clearAB");
 
 let speeds=[1,1.25,1.5,2];
 let speedIndex=0;
+let loopMode=false;
+let markerA=null;
+let markerB=null;
 
 audio.addEventListener("loadedmetadata",()=>{
 duration.textContent=formatTime(audio.duration);
@@ -323,6 +293,13 @@ playBtn.textContent="▶";
 audio.addEventListener("timeupdate",()=>{
 progress.value=audio.currentTime;
 current.textContent=formatTime(audio.currentTime);
+
+if(markerA!==null && markerB!==null && loopMode){
+if(audio.currentTime>=markerB){
+audio.currentTime=markerA;
+audio.play();
+}
+}
 });
 
 progress.addEventListener("input",()=>{
@@ -330,14 +307,31 @@ audio.currentTime=progress.value;
 });
 
 loopBtn.addEventListener("click",()=>{
-audio.loop=!audio.loop;
-loopBtn.textContent=audio.loop?"Loop ON":"Loop OFF";
+loopMode=!loopMode;
+loopBtn.textContent=loopMode?"Loop ON":"Loop OFF";
 });
 
 speedBtn.addEventListener("click",()=>{
 speedIndex=(speedIndex+1)%speeds.length;
 audio.playbackRate=speeds[speedIndex];
 speedBtn.textContent=speeds[speedIndex]+"x";
+});
+
+setA.addEventListener("click",()=>{
+markerA=audio.currentTime;
+setA.textContent="A: "+formatTime(markerA);
+});
+
+setB.addEventListener("click",()=>{
+markerB=audio.currentTime;
+setB.textContent="B: "+formatTime(markerB);
+});
+
+clearAB.addEventListener("click",()=>{
+markerA=null;
+markerB=null;
+setA.textContent="Set A";
+setB.textContent="Set B";
 });
 
 function formatTime(seconds){
