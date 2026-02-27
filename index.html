@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loop Player with Markers</title>
+
+<title>Loop Player</title>
 
 <style>
 
@@ -14,82 +15,105 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
 }
 
 .player{
 background:#fff;
 border-radius:12px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
-padding:20px;
+padding:22px;
+width:340px;
 text-align:center;
-width:320px;
 }
 
+/* PLAY BUTTON */
+
 .play-btn{
-width:64px;
-height:64px;
+width:70px;
+height:70px;
 border-radius:50%;
 border:2px solid #ccc;
 background:#fff;
 color:#007aff;
-font-size:28px;
+font-size:32px;
 display:flex;
 align-items:center;
 justify-content:center;
-margin:0 auto 15px;
+margin:0 auto 16px;
 cursor:pointer;
+transition:all .2s;
 }
 
-.progress-wrapper{
+.play-btn:hover{
+border-color:#007aff;
+}
+
+/* PROGRESS BAR */
+
+.progress-container{
 position:relative;
 width:100%;
+margin:12px 0;
 }
 
 .progress{
 -webkit-appearance:none;
 width:100%;
-height:4px;
-border-radius:2px;
+height:6px;
+border-radius:3px;
 background:#e5e5e5;
 outline:none;
-margin:10px 0;
 }
 
 .progress::-webkit-slider-thumb{
 -webkit-appearance:none;
-width:14px;
-height:14px;
+width:16px;
+height:16px;
 border-radius:50%;
 background:#007aff;
 cursor:pointer;
 margin-top:-5px;
 }
 
-/* MARKERS */
+/* LOOP REGION */
+
+.loop-region{
+position:absolute;
+top:0;
+height:6px;
+background:rgba(0,122,255,0.25);
+border-radius:3px;
+display:none;
+}
+
+/* CLEAN BLUE MARKERS */
 
 .marker{
 position:absolute;
-top:6px;
-width:3px;
-height:10px;
-background:red;
+top:-4px;
+width:4px;
+height:14px;
+background:#007aff;
 border-radius:2px;
-transform:translateX(-50%);
+display:none;
+box-shadow:0 0 0 2px #fff;
 }
 
-.markerB{
-background:green;
-}
+/* TIME */
 
 .time{
 display:flex;
 justify-content:space-between;
 font-size:12px;
 color:#555;
+margin-top:4px;
 }
 
+/* CONTROLS */
+
 .controls{
-margin-top:12px;
+margin-top:14px;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
@@ -103,22 +127,39 @@ border-radius:8px;
 background:#f9f9f9;
 font-size:14px;
 cursor:pointer;
+transition:.2s;
+}
+
+.btn:hover{
+border-color:#007aff;
+color:#007aff;
+}
+
+select{
+padding:6px 10px;
+border-radius:6px;
+border:1px solid #ccc;
+background:#fff;
+cursor:pointer;
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="player">
 
 <div class="play-btn" id="playBtn">▶</div>
 
-<div class="progress-wrapper">
+<div class="progress-container">
+
+<div id="loopRegion" class="loop-region"></div>
+
+<div id="markerA" class="marker"></div>
+<div id="markerB" class="marker"></div>
 
 <input type="range" class="progress" id="progress" value="0" min="0" max="100">
-
-<div class="marker" id="markerA" style="display:none"></div>
-<div class="marker markerB" id="markerB" style="display:none"></div>
 
 </div>
 
@@ -128,11 +169,24 @@ cursor:pointer;
 </div>
 
 <div class="controls">
+
 <button class="btn" id="loopBtn">Loop OFF</button>
-<button class="btn" id="speedBtn">1x</button>
+
+<select id="speedSelect">
+<option value="0.25">0.25x</option>
+<option value="0.5">0.5x</option>
+<option value="0.75">0.75x</option>
+<option value="1" selected>1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+<option value="1.75">1.75x</option>
+<option value="2">2x</option>
+</select>
+
 <button class="btn" id="setA">Set A</button>
 <button class="btn" id="setB">Set B</button>
-<button class="btn" id="clearAB">Clear A-B</button>
+<button class="btn" id="clearAB">Clear</button>
+
 </div>
 
 <audio id="audio" src="/audio/loop_000001.wav"></audio>
@@ -147,16 +201,17 @@ const progress=document.getElementById("progress")
 const current=document.getElementById("current")
 const duration=document.getElementById("duration")
 const loopBtn=document.getElementById("loopBtn")
-const speedBtn=document.getElementById("speedBtn")
+
 const setA=document.getElementById("setA")
 const setB=document.getElementById("setB")
 const clearAB=document.getElementById("clearAB")
 
 const markerAEl=document.getElementById("markerA")
 const markerBEl=document.getElementById("markerB")
+const loopRegion=document.getElementById("loopRegion")
 
-let speeds=[1,1.25,1.5,2]
-let speedIndex=0
+const speedSelect=document.getElementById("speedSelect")
+
 let loopMode=false
 let markerA=null
 let markerB=null
@@ -177,14 +232,16 @@ playBtn.textContent="▶"
 }
 
 audio.addEventListener("timeupdate",()=>{
+
 progress.value=audio.currentTime
 current.textContent=formatTime(audio.currentTime)
 
-if(markerA!==null && markerB!==null && loopMode){
+if(loopMode && markerA!==null && markerB!==null){
 if(audio.currentTime>=markerB){
 audio.currentTime=markerA
 }
 }
+
 })
 
 progress.oninput=()=>{
@@ -196,22 +253,22 @@ loopMode=!loopMode
 loopBtn.textContent=loopMode?"Loop ON":"Loop OFF"
 }
 
-speedBtn.onclick=()=>{
-speedIndex=(speedIndex+1)%speeds.length
-audio.playbackRate=speeds[speedIndex]
-speedBtn.textContent=speeds[speedIndex]+"x"
+speedSelect.onchange=()=>{
+audio.playbackRate=parseFloat(speedSelect.value)
 }
+
+/* SET MARKERS */
 
 setA.onclick=()=>{
 markerA=audio.currentTime
-setA.textContent="A: "+formatTime(markerA)
 updateMarker(markerA,markerAEl)
+updateRegion()
 }
 
 setB.onclick=()=>{
 markerB=audio.currentTime
-setB.textContent="B: "+formatTime(markerB)
 updateMarker(markerB,markerBEl)
+updateRegion()
 }
 
 clearAB.onclick=()=>{
@@ -219,20 +276,43 @@ markerA=null
 markerB=null
 markerAEl.style.display="none"
 markerBEl.style.display="none"
-setA.textContent="Set A"
-setB.textContent="Set B"
+loopRegion.style.display="none"
 }
 
+/* MARKER POSITION */
+
 function updateMarker(time,el){
+
 const percent=(time/audio.duration)*100
 el.style.left=percent+"%"
 el.style.display="block"
+
+}
+
+/* LOOP REGION */
+
+function updateRegion(){
+
+if(markerA!==null && markerB!==null){
+
+const start=(markerA/audio.duration)*100
+const end=(markerB/audio.duration)*100
+
+loopRegion.style.left=start+"%"
+loopRegion.style.width=(end-start)+"%"
+loopRegion.style.display="block"
+
+}
+
 }
 
 function formatTime(seconds){
+
 const m=Math.floor(seconds/60)
 const s=Math.floor(seconds%60)
+
 return m+":"+(s<10?"0":"")+s
+
 }
 
 </script>
