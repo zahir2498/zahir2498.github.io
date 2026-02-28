@@ -10,19 +10,28 @@
 
 body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-background:#fff;
+background:#ffffff;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 margin:0;
+flex-direction:column;
+color:#111;
 }
 
+/* HEADING */
+
+h1{
+font-size:22px;
+font-weight:600;
+margin-bottom:18px;
+}
+
+/* PLAYER */
+
 .player{
-background:#fff;
-border-radius:10px;
-border:1px solid #e5e5e5;
-padding:24px;
+padding:10px 0;
 width:340px;
 text-align:center;
 }
@@ -33,15 +42,20 @@ text-align:center;
 width:70px;
 height:70px;
 border-radius:50%;
-border:2px solid #ccc;
+border:2px solid #dcdcdc;
 background:#fff;
 color:#007aff;
 font-size:32px;
 display:flex;
 align-items:center;
 justify-content:center;
-margin:0 auto 16px;
+margin:0 auto 18px;
 cursor:pointer;
+transition:all .15s ease;
+}
+
+.play-btn:hover{
+border-color:#007aff;
 }
 
 /* PROGRESS BAR */
@@ -49,14 +63,14 @@ cursor:pointer;
 .progress-container{
 position:relative;
 width:100%;
-margin:12px 0;
+margin:12px 0 8px 0;
 }
 
 .progress{
 -webkit-appearance:none;
 width:100%;
 height:6px;
-border-radius:3px;
+border-radius:4px;
 background:#e5e5e5;
 outline:none;
 }
@@ -79,7 +93,7 @@ top:50%;
 transform:translateY(-50%);
 height:6px;
 background:rgba(0,122,255,0.25);
-border-radius:3px;
+border-radius:4px;
 display:none;
 }
 
@@ -102,7 +116,7 @@ display:none;
 display:flex;
 justify-content:space-between;
 font-size:13px;
-color:#555;
+color:#666;
 margin-top:6px;
 }
 
@@ -118,31 +132,41 @@ gap:8px;
 
 .btn{
 padding:7px 14px;
-border:1px solid #ccc;
-border-radius:6px;
-background:#f9f9f9;
+border:1px solid #e0e0e0;
+border-radius:8px;
+background:#fafafa;
 font-size:14px;
 cursor:pointer;
+transition:all .15s ease;
 }
 
-/* SPEED DROPDOWN */
+.btn:hover{
+border-color:#007aff;
+color:#007aff;
+background:#fff;
+}
+
+/* SPEED SELECT */
 
 select{
 padding:7px 12px;
-border-radius:6px;
-border:1px solid #ccc;
+border-radius:8px;
+border:1px solid #e0e0e0;
 font-size:14px;
-text-align:center;
-text-align-last:center;
-appearance:none;
-background:#fff;
-min-width:70px;
+background:#fafafa;
+cursor:pointer;
+}
+
+select:hover{
+border-color:#007aff;
 }
 
 </style>
 </head>
 
 <body>
+
+<h1>Loop 1</h1>
 
 <div class="player">
 
@@ -169,19 +193,19 @@ min-width:70px;
 <button class="btn" id="loopBtn">Loop OFF</button>
 
 <select id="speedSelect">
-<option value="0.25">0.25×</option>
-<option value="0.5">0.5×</option>
-<option value="0.75">0.75×</option>
-<option value="1" selected>1×</option>
-<option value="1.25">1.25×</option>
-<option value="1.5">1.5×</option>
-<option value="1.75">1.75×</option>
-<option value="2">2×</option>
+<option value="0.25">0.25x</option>
+<option value="0.5">0.5x</option>
+<option value="0.75">0.75x</option>
+<option value="1" selected>1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+<option value="1.75">1.75x</option>
+<option value="2">2x</option>
 </select>
 
 <button class="btn" id="setA">Set A</button>
 <button class="btn" id="setB">Set B</button>
-<button class="btn" id="clearAB">Clear A/B</button>
+<button class="btn" id="clearAB">ClearA/B</button>
 
 </div>
 
@@ -276,7 +300,6 @@ loopRegion.style.display="none"
 function updateMarker(time,el){
 
 const percent=(time/audio.duration)*100
-
 el.style.left=percent+"%"
 el.style.display="block"
 
