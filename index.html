@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Loop Player</title>
+<title>Loop 1</title>
 
 <style>
 
@@ -20,9 +20,9 @@ margin:0;
 
 .player{
 background:#fff;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-padding:22px;
+border-radius:10px;
+border:1px solid #e5e5e5;
+padding:24px;
 width:340px;
 text-align:center;
 }
@@ -101,15 +101,15 @@ display:none;
 .time{
 display:flex;
 justify-content:space-between;
-font-size:12px;
+font-size:13px;
 color:#555;
-margin-top:4px;
+margin-top:6px;
 }
 
 /* CONTROLS */
 
 .controls{
-margin-top:14px;
+margin-top:16px;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
@@ -117,18 +117,26 @@ gap:8px;
 }
 
 .btn{
-padding:6px 14px;
+padding:7px 14px;
 border:1px solid #ccc;
-border-radius:8px;
+border-radius:6px;
 background:#f9f9f9;
 font-size:14px;
 cursor:pointer;
 }
 
+/* SPEED DROPDOWN */
+
 select{
-padding:6px 10px;
+padding:7px 12px;
 border-radius:6px;
 border:1px solid #ccc;
+font-size:14px;
+text-align:center;
+text-align-last:center;
+appearance:none;
+background:#fff;
+min-width:70px;
 }
 
 </style>
@@ -161,19 +169,19 @@ border:1px solid #ccc;
 <button class="btn" id="loopBtn">Loop OFF</button>
 
 <select id="speedSelect">
-<option value="0.25">0.25x</option>
-<option value="0.5">0.5x</option>
-<option value="0.75">0.75x</option>
-<option value="1" selected>1x</option>
-<option value="1.25">1.25x</option>
-<option value="1.5">1.5x</option>
-<option value="1.75">1.75x</option>
-<option value="2">2x</option>
+<option value="0.25">0.25×</option>
+<option value="0.5">0.5×</option>
+<option value="0.75">0.75×</option>
+<option value="1" selected>1×</option>
+<option value="1.25">1.25×</option>
+<option value="1.5">1.5×</option>
+<option value="1.75">1.75×</option>
+<option value="2">2×</option>
 </select>
 
 <button class="btn" id="setA">Set A</button>
 <button class="btn" id="setB">Set B</button>
-<button class="btn" id="clearAB">Clear</button>
+<button class="btn" id="clearAB">Clear A/B</button>
 
 </div>
 
