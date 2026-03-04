@@ -23,7 +23,7 @@ color:#1d1d1f;
 h1{
 font-size:26px;
 font-weight:600;
-margin-bottom:20px;
+margin-bottom:18px;
 }
 
 /* banner */
@@ -32,7 +32,7 @@ margin-bottom:20px;
 width:100%;
 max-width:760px;
 border-radius:14px;
-margin-bottom:26px;
+margin-bottom:24px;
 }
 
 /* player */
@@ -42,10 +42,12 @@ width:100%;
 max-width:760px;
 }
 
+/* player row */
+
 .player-row{
 display:flex;
 align-items:center;
-gap:12px;
+gap:10px;
 }
 
 /* play button */
@@ -105,7 +107,6 @@ height:8px;
 background:rgba(0,122,255,.35);
 border-radius:10px;
 display:none;
-z-index:1;
 }
 
 /* markers */
@@ -119,7 +120,6 @@ height:22px;
 background:#007aff;
 border-radius:3px;
 display:none;
-z-index:2;
 }
 
 /* time row */
@@ -186,8 +186,8 @@ margin-top:40px;
 border:1px solid #e6e6eb;
 border-radius:12px;
 margin-bottom:12px;
-overflow:hidden;
 background:white;
+overflow:hidden;
 }
 
 .header{
@@ -223,7 +223,7 @@ color:#444;
 
 .item.active .content{
 max-height:800px;
-padding:16px 18px 20px 18px;
+padding:16px 18px 20px;
 }
 
 /* flashcards */
@@ -232,7 +232,7 @@ padding:16px 18px 20px 18px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
 gap:14px;
-margin-top:12px;
+margin-top:10px;
 }
 
 .card{
@@ -366,7 +366,6 @@ height:80px;
 
 </div>
 
-<!-- Lesson accordion -->
 
 <div class="lesson">
 
@@ -387,7 +386,8 @@ Oh ah beh-ses | leh kah-eh | ah oo-no | en-see-mah. | Yah-ee es | frahk-too-rah�
 <div class="item">
 <div class="header">3. Translation <span class="arrow">▼</span></div>
 <div class="content">
-Or sometimes it falls right on top of you. At that point it’s a fracture… guaranteed.
+Or sometimes it falls right on top of you.  
+At that point it’s a fracture… guaranteed.
 </div>
 </div>
 
@@ -400,6 +400,21 @@ The line warns that if something heavy drops on someone, the result is basically
 
 <div class="item">
 <div class="header">5. Contextual Vocab <span class="arrow">▼</span></div>
+<div class="content">
+a veces — sometimes<br>
+le cae — it falls on<br>
+a uno — on one / you<br>
+encima — on top<br>
+fractura — fracture<br>
+asegurada — guaranteed
+</div>
+</div>
+
+
+<!-- FLASHCARDS SECTION -->
+
+<div class="item">
+<div class="header">Flashcards <span class="arrow">▼</span></div>
 
 <div class="content">
 
@@ -452,10 +467,12 @@ The line warns that if something heavy drops on someone, the result is basically
 </div>
 </div>
 
+
 <div class="item">
 <div class="header">6. Grammar <span class="arrow">▼</span></div>
 <div class="content">
-Spanish often describes accidents impersonally. Instead of saying “the ladder fell on me”, Spanish says “le cae a uno encima”.
+Spanish often describes accidents impersonally using expressions like  
+“le cae a uno encima”.
 </div>
 </div>
 
@@ -473,23 +490,6 @@ asegurada = guaranteed
 </div>
 
 <div class="item">
-<div class="header">8. Tags <span class="arrow">▼</span></div>
-<div class="content">
-o, veces, le, cae, uno, encima, ahí, fractura, asegurada
-</div>
-</div>
-
-<div class="item">
-<div class="header">Core Exercise <span class="arrow">▼</span></div>
-<div class="content">
-Listen → Play loop 100 times (~14 minutes)<br>
-Mimic → Speak the loop 10 times<br>
-Write → Copy transcription<br>
-Cards → Study flashcards
-</div>
-</div>
-
-<div class="item">
 <div class="header">Vocab Quiz <span class="arrow">▼</span></div>
 <div class="content">
 What word means “on top”? → encima<br>
@@ -500,13 +500,13 @@ What word means “guaranteed”? → asegurada
 
 </div>
 
-<script>
 
-/* player */
+<script>
 
 const audio=document.getElementById("audio")
 const playBtn=document.getElementById("playBtn")
 const progress=document.getElementById("progress")
+
 const current=document.getElementById("current")
 const duration=document.getElementById("duration")
 
@@ -592,7 +592,9 @@ loopRegion.style.width=(end-start)+"%"
 loopRegion.style.display="block"
 
 }else{
+
 loopRegion.style.display="none"
+
 }
 
 }
@@ -629,7 +631,7 @@ markerBEl.style.display="none"
 updateRegion()
 }
 
-/* accordion manual toggle */
+/* dropdown toggle */
 
 document.querySelectorAll(".header").forEach(header=>{
 header.addEventListener("click",()=>{
