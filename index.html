@@ -26,7 +26,7 @@ font-weight:600;
 margin-bottom:20px;
 }
 
-/* Banner */
+/* banner */
 
 .loop-image{
 width:100%;
@@ -35,7 +35,7 @@ border-radius:14px;
 margin-bottom:26px;
 }
 
-/* Player */
+/* player */
 
 .player{
 width:100%;
@@ -48,7 +48,7 @@ align-items:center;
 gap:12px;
 }
 
-/* Play button */
+/* play button */
 
 .play-btn{
 width:38px;
@@ -64,7 +64,7 @@ justify-content:center;
 cursor:pointer;
 }
 
-/* Progress bar */
+/* progress */
 
 .progress-container{
 position:relative;
@@ -96,7 +96,7 @@ border:2px solid white;
 margin-top:-5px;
 }
 
-/* Loop region */
+/* loop region */
 
 .loop-region{
 position:absolute;
@@ -108,7 +108,7 @@ display:none;
 z-index:1;
 }
 
-/* Markers */
+/* markers */
 
 .marker{
 position:absolute;
@@ -122,7 +122,7 @@ display:none;
 z-index:2;
 }
 
-/* Time row */
+/* time row */
 
 .time-row{
 display:flex;
@@ -156,7 +156,7 @@ border-radius:20px;
 padding:4px 12px;
 }
 
-/* Buttons */
+/* buttons */
 
 .controls{
 display:flex;
@@ -174,7 +174,7 @@ background:#fff;
 cursor:pointer;
 }
 
-/* Accordion lesson */
+/* lesson section */
 
 .lesson{
 width:100%;
@@ -197,7 +197,6 @@ align-items:center;
 padding:16px 18px;
 cursor:pointer;
 font-weight:600;
-font-size:15px;
 }
 
 .header:hover{
@@ -227,7 +226,59 @@ max-height:800px;
 padding:16px 18px 20px 18px;
 }
 
-/* Mobile */
+/* flashcards */
+
+.flashcards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:14px;
+margin-top:12px;
+}
+
+.card{
+perspective:1000px;
+cursor:pointer;
+}
+
+.card-inner{
+position:relative;
+width:100%;
+height:90px;
+transition:transform .6s;
+transform-style:preserve-3d;
+}
+
+.card.flip .card-inner{
+transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
+padding:10px;
+text-align:center;
+}
+
+.card-front{
+background:white;
+border:1px solid #e6e6eb;
+}
+
+.card-back{
+background:#007aff;
+color:white;
+transform:rotateY(180deg);
+}
+
+/* mobile */
 
 @media(max-width:600px){
 
@@ -239,6 +290,10 @@ gap:8px;
 width:34px;
 height:34px;
 font-size:16px;
+}
+
+.card-inner{
+height:80px;
 }
 
 }
@@ -311,7 +366,6 @@ font-size:16px;
 
 </div>
 
-
 <!-- Lesson accordion -->
 
 <div class="lesson">
@@ -340,26 +394,68 @@ Or sometimes it falls right on top of you. At that point it’s a fracture… gu
 <div class="item">
 <div class="header">4. Contextual Explanation <span class="arrow">▼</span></div>
 <div class="content">
-The line is a warning: if something heavy drops on a person, the result is basically a guaranteed broken bone. The pause before asegurada adds emphasis.
+The line warns that if something heavy drops on someone, the result is basically a guaranteed broken bone.
 </div>
 </div>
 
 <div class="item">
 <div class="header">5. Contextual Vocab <span class="arrow">▼</span></div>
+
 <div class="content">
-a veces — sometimes<br>
-le cae — it falls on (someone)<br>
-a uno — on one / on you<br>
-encima — on top<br>
-fractura — fracture<br>
-asegurada — guaranteed
+
+<div class="flashcards">
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">a veces</div>
+<div class="card-back">sometimes</div>
+</div>
+</div>
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">le cae</div>
+<div class="card-back">it falls on</div>
+</div>
+</div>
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">a uno</div>
+<div class="card-back">on one / you</div>
+</div>
+</div>
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">encima</div>
+<div class="card-back">on top</div>
+</div>
+</div>
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">fractura</div>
+<div class="card-back">fracture</div>
+</div>
+</div>
+
+<div class="card" onclick="this.classList.toggle('flip')">
+<div class="card-inner">
+<div class="card-front">asegurada</div>
+<div class="card-back">guaranteed</div>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 <div class="item">
 <div class="header">6. Grammar <span class="arrow">▼</span></div>
 <div class="content">
-Spanish often describes accidents impersonally. Instead of saying "the ladder fell on me", Spanish says "le cae a uno encima" meaning "it falls on someone".
+Spanish often describes accidents impersonally. Instead of saying “the ladder fell on me”, Spanish says “le cae a uno encima”.
 </div>
 </div>
 
@@ -370,7 +466,6 @@ O = or<br>
 a veces = sometimes<br>
 le = to him/her/you<br>
 cae = falls<br>
-a uno = on one<br>
 encima = on top<br>
 fractura = fracture<br>
 asegurada = guaranteed
@@ -387,28 +482,27 @@ o, veces, le, cae, uno, encima, ahí, fractura, asegurada
 <div class="item">
 <div class="header">Core Exercise <span class="arrow">▼</span></div>
 <div class="content">
-Listen → Play loop 100 times (~14 minutes).<br>
-Mimic → Speak the loop at least 10 times.<br>
-Write → Copy transcription.<br>
-Cards → Review flashcards.
+Listen → Play loop 100 times (~14 minutes)<br>
+Mimic → Speak the loop 10 times<br>
+Write → Copy transcription<br>
+Cards → Study flashcards
 </div>
 </div>
 
 <div class="item">
 <div class="header">Vocab Quiz <span class="arrow">▼</span></div>
 <div class="content">
-What word means "on top"? → encima<br>
-What word means "fracture"? → fractura<br>
-What word means "guaranteed"? → asegurada
+What word means “on top”? → encima<br>
+What word means “fracture”? → fractura<br>
+What word means “guaranteed”? → asegurada
 </div>
 </div>
 
 </div>
-
 
 <script>
 
-/* AUDIO PLAYER */
+/* player */
 
 const audio=document.getElementById("audio")
 const playBtn=document.getElementById("playBtn")
@@ -535,16 +629,11 @@ markerBEl.style.display="none"
 updateRegion()
 }
 
-/* ACCORDION */
+/* accordion manual toggle */
 
-const items=document.querySelectorAll(".item")
-
-items.forEach(item=>{
-item.querySelector(".header").addEventListener("click",()=>{
-items.forEach(i=>{
-if(i!==item){i.classList.remove("active")}
-})
-item.classList.toggle("active")
+document.querySelectorAll(".header").forEach(header=>{
+header.addEventListener("click",()=>{
+header.parentElement.classList.toggle("active")
 })
 })
 
