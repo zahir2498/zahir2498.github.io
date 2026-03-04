@@ -13,7 +13,7 @@ body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
 background:#fbfbfd;
 margin:0;
-padding:40px 20px;
+padding:30px 15px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -26,7 +26,7 @@ font-weight:600;
 margin-bottom:20px;
 }
 
-/* banner */
+/* Banner */
 
 .loop-image{
 width:100%;
@@ -35,14 +35,12 @@ border-radius:14px;
 margin-bottom:26px;
 }
 
-/* player */
+/* Player */
 
 .player{
 width:100%;
 max-width:760px;
 }
-
-/* row */
 
 .player-row{
 display:flex;
@@ -50,15 +48,15 @@ align-items:center;
 gap:12px;
 }
 
-/* play */
+/* Play button */
 
 .play-btn{
-width:40px;
-height:40px;
+width:38px;
+height:38px;
 border-radius:50%;
 background:#007aff;
 color:white;
-font-size:20px;
+font-size:18px;
 border:none;
 display:flex;
 align-items:center;
@@ -66,7 +64,7 @@ justify-content:center;
 cursor:pointer;
 }
 
-/* progress container */
+/* Progress bar */
 
 .progress-container{
 position:relative;
@@ -75,8 +73,6 @@ height:8px;
 background:#e6e6eb;
 border-radius:10px;
 }
-
-/* slider */
 
 .progress{
 -webkit-appearance:none;
@@ -100,7 +96,7 @@ border:2px solid white;
 margin-top:-5px;
 }
 
-/* loop highlight */
+/* Loop region */
 
 .loop-region{
 position:absolute;
@@ -112,7 +108,7 @@ display:none;
 z-index:1;
 }
 
-/* markers */
+/* Markers */
 
 .marker{
 position:absolute;
@@ -126,7 +122,7 @@ display:none;
 z-index:2;
 }
 
-/* time row */
+/* Time row */
 
 .time-row{
 display:flex;
@@ -136,8 +132,6 @@ margin-top:10px;
 font-size:14px;
 color:#6e6e73;
 }
-
-/* controls */
 
 .middle-controls{
 display:flex;
@@ -162,6 +156,8 @@ border-radius:20px;
 padding:4px 12px;
 }
 
+/* Buttons */
+
 .controls{
 display:flex;
 justify-content:center;
@@ -178,69 +174,62 @@ background:#fff;
 cursor:pointer;
 }
 
-/* flashcards */
+/* Accordion lesson */
 
-.flash-section{
+.lesson{
 width:100%;
 max-width:760px;
-margin-top:50px;
+margin-top:40px;
 }
 
-.flash-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-.card{
-perspective:1000px;
-cursor:pointer;
-}
-
-.card-inner{
-position:relative;
-width:100%;
-height:140px;
-transition:transform .6s;
-transform-style:preserve-3d;
-}
-
-.card.flip .card-inner{
-transform:rotateY(180deg);
-}
-
-.card-front,
-.card-back{
-position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
+.item{
+border:1px solid #e6e6eb;
 border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-text-align:center;
-}
-
-.card-front{
+margin-bottom:12px;
+overflow:hidden;
 background:white;
-border:1px solid #eee;
 }
 
-.card-back{
-background:#007aff;
-color:white;
-transform:rotateY(180deg);
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 18px;
+cursor:pointer;
+font-weight:600;
+font-size:15px;
 }
 
-/* responsive */
+.header:hover{
+background:#f5f5f7;
+}
+
+.arrow{
+transition:transform .3s;
+}
+
+.item.active .arrow{
+transform:rotate(180deg);
+}
+
+.content{
+max-height:0;
+overflow:hidden;
+transition:max-height .35s ease;
+padding:0 18px;
+font-size:14px;
+line-height:1.6;
+color:#444;
+}
+
+.item.active .content{
+max-height:800px;
+padding:16px 18px 20px 18px;
+}
+
+/* Mobile */
 
 @media(max-width:600px){
-
-body{
-padding:20px 12px;
-}
 
 .player-row{
 gap:8px;
@@ -323,42 +312,95 @@ font-size:16px;
 </div>
 
 
-<!-- FLASHCARDS -->
+<!-- Lesson accordion -->
 
-<div class="flash-section">
+<div class="lesson">
 
-<h2>Flashcards</h2>
-
-<div class="flash-grid">
-
-<div class="card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-<div class="card-front">a veces</div>
-<div class="card-back">sometimes</div>
+<div class="item">
+<div class="header">1. Transcription <span class="arrow">▼</span></div>
+<div class="content">
+O a veces le cae a uno encima. Y ahí es fractura… asegurada.
 </div>
 </div>
 
-<div class="card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-<div class="card-front">encima</div>
-<div class="card-back">on top of</div>
+<div class="item">
+<div class="header">2. Phonetics <span class="arrow">▼</span></div>
+<div class="content">
+Oh ah beh-ses | leh kah-eh | ah oo-no | en-see-mah. | Yah-ee es | frahk-too-rah… | ah-seh-goo-rah-dah.
 </div>
 </div>
 
-<div class="card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-<div class="card-front">fractura</div>
-<div class="card-back">fracture</div>
+<div class="item">
+<div class="header">3. Translation <span class="arrow">▼</span></div>
+<div class="content">
+Or sometimes it falls right on top of you. At that point it’s a fracture… guaranteed.
 </div>
 </div>
 
-<div class="card" onclick="this.classList.toggle('flip')">
-<div class="card-inner">
-<div class="card-front">asegurada</div>
-<div class="card-back">guaranteed</div>
+<div class="item">
+<div class="header">4. Contextual Explanation <span class="arrow">▼</span></div>
+<div class="content">
+The line is a warning: if something heavy drops on a person, the result is basically a guaranteed broken bone. The pause before asegurada adds emphasis.
 </div>
 </div>
 
+<div class="item">
+<div class="header">5. Contextual Vocab <span class="arrow">▼</span></div>
+<div class="content">
+a veces — sometimes<br>
+le cae — it falls on (someone)<br>
+a uno — on one / on you<br>
+encima — on top<br>
+fractura — fracture<br>
+asegurada — guaranteed
+</div>
+</div>
+
+<div class="item">
+<div class="header">6. Grammar <span class="arrow">▼</span></div>
+<div class="content">
+Spanish often describes accidents impersonally. Instead of saying "the ladder fell on me", Spanish says "le cae a uno encima" meaning "it falls on someone".
+</div>
+</div>
+
+<div class="item">
+<div class="header">7. Literal Vocab <span class="arrow">▼</span></div>
+<div class="content">
+O = or<br>
+a veces = sometimes<br>
+le = to him/her/you<br>
+cae = falls<br>
+a uno = on one<br>
+encima = on top<br>
+fractura = fracture<br>
+asegurada = guaranteed
+</div>
+</div>
+
+<div class="item">
+<div class="header">8. Tags <span class="arrow">▼</span></div>
+<div class="content">
+o, veces, le, cae, uno, encima, ahí, fractura, asegurada
+</div>
+</div>
+
+<div class="item">
+<div class="header">Core Exercise <span class="arrow">▼</span></div>
+<div class="content">
+Listen → Play loop 100 times (~14 minutes).<br>
+Mimic → Speak the loop at least 10 times.<br>
+Write → Copy transcription.<br>
+Cards → Review flashcards.
+</div>
+</div>
+
+<div class="item">
+<div class="header">Vocab Quiz <span class="arrow">▼</span></div>
+<div class="content">
+What word means "on top"? → encima<br>
+What word means "fracture"? → fractura<br>
+What word means "guaranteed"? → asegurada
+</div>
 </div>
 
 </div>
@@ -366,10 +408,11 @@ font-size:16px;
 
 <script>
 
+/* AUDIO PLAYER */
+
 const audio=document.getElementById("audio")
 const playBtn=document.getElementById("playBtn")
 const progress=document.getElementById("progress")
-
 const current=document.getElementById("current")
 const duration=document.getElementById("duration")
 
@@ -491,6 +534,19 @@ markerAEl.style.display="none"
 markerBEl.style.display="none"
 updateRegion()
 }
+
+/* ACCORDION */
+
+const items=document.querySelectorAll(".item")
+
+items.forEach(item=>{
+item.querySelector(".header").addEventListener("click",()=>{
+items.forEach(i=>{
+if(i!==item){i.classList.remove("active")}
+})
+item.classList.toggle("active")
+})
+})
 
 </script>
 
