@@ -369,6 +369,7 @@ height:80px;
 
 <div class="lesson">
 
+<!-- 1 -->
 <div class="item">
 <div class="header">1. Transcription <span class="arrow">▼</span></div>
 <div class="content">
@@ -376,6 +377,7 @@ O a veces le cae a uno encima. Y ahí es fractura… asegurada.
 </div>
 </div>
 
+<!-- 2 -->
 <div class="item">
 <div class="header">2. Phonetics <span class="arrow">▼</span></div>
 <div class="content">
@@ -383,6 +385,7 @@ Oh ah beh-ses | leh kah-eh | ah oo-no | en-see-mah. | Yah-ee es | frahk-too-rah�
 </div>
 </div>
 
+<!-- 3 -->
 <div class="item">
 <div class="header">3. Translation <span class="arrow">▼</span></div>
 <div class="content">
@@ -391,30 +394,110 @@ At that point it’s a fracture… guaranteed.
 </div>
 </div>
 
+<!-- 4 -->
 <div class="item">
 <div class="header">4. Contextual Explanation <span class="arrow">▼</span></div>
 <div class="content">
-The line warns that if something heavy drops on someone, the result is basically a guaranteed broken bone.
+The line is a warning: if something heavy drops on a person, the result is basically a guaranteed broken bone.  
+The pause before <b>asegurada</b> adds emphasis, like “…yup, for sure.”
 </div>
 </div>
 
+<!-- 5 -->
 <div class="item">
 <div class="header">5. Contextual Vocab <span class="arrow">▼</span></div>
 <div class="content">
-a veces — sometimes<br>
-le cae — it falls on<br>
-a uno — on one / you<br>
-encima — on top<br>
-fractura — fracture<br>
-asegurada — guaranteed
+
+a veces — sometimes  
+le cae — it falls on (someone)  
+a uno — on one / on you (general)  
+encima — on top (of)  
+ahí — there/then → here: “that’s when”  
+fractura — fracture  
+asegurada — guaranteed  
+
 </div>
 </div>
 
-
-<!-- FLASHCARDS SECTION -->
-
+<!-- 6 -->
 <div class="item">
-<div class="header">Flashcards <span class="arrow">▼</span></div>
+<div class="header">6. Grammar <span class="arrow">▼</span></div>
+<div class="content">
+
+This line shows how Spanish often talks about accidents in an impersonal way.
+
+Instead of saying “the ladder fell on me,” the speaker says:
+
+<b>le cae a uno encima</b> — literally “it falls on one.”
+
+• <b>le</b> marks the person affected  
+• <b>a uno</b> makes the statement general (“on you / on a person”)  
+
+<b>Y ahí</b> works as a connector meaning **“and that’s when.”**
+
+The result is expressed as:
+
+<b>es fractura asegurada</b> → “it’s a guaranteed fracture.”
+
+Notice the speaker drops **una** before fractura — this makes it punchier and faster in conversation.
+
+<b>Verb tense:</b>  
+<b>cae</b> = present tense of *caer* (to fall)  
+3rd person singular → **“it falls.”**
+
+Used here to describe something that can generally happen.
+
+</div>
+</div>
+
+<!-- 7 -->
+<div class="item">
+<div class="header">7. Literal Vocab <span class="arrow">▼</span></div>
+<div class="content">
+
+O = or  
+a veces = sometimes  
+le = to him/her/you  
+cae = falls  
+a uno = on one / on you  
+encima = on top (of)  
+Y ahí = and then / at that point  
+es = is  
+fractura = fracture  
+asegurada = guaranteed  
+
+</div>
+</div>
+
+<!-- 8 -->
+<div class="item">
+<div class="header">8. Core Exercise <span class="arrow">▼</span></div>
+<div class="content">
+
+<b>Listen</b>  
+Play the loop **100 times (~14 minutes)**.  
+Let rhythm, tone, and timing burn in.
+
+<b>Mimic</b>  
+Speak the loop **at least 10 times**, copying sounds, pauses, and intonation.
+
+<b>Write</b>  
+Copy the full transcription once in your notebook.
+
+<b>Cards</b>  
+Make flashcards for each contextual vocab item.
+
+<b>Cycle</b>  
+Listen → Mimic → Write → Review flashcards.
+
+Repeat until the sentence feels automatic.
+
+</div>
+</div>
+
+<!-- 9 FLASHCARDS -->
+<div class="item">
+<div class="header">9. Flashcards <span class="arrow">▼</span></div>
 
 <div class="content">
 
@@ -467,34 +550,25 @@ asegurada — guaranteed
 </div>
 </div>
 
-
+<!-- 10 -->
 <div class="item">
-<div class="header">6. Grammar <span class="arrow">▼</span></div>
+<div class="header">10. Vocab Quiz <span class="arrow">▼</span></div>
 <div class="content">
-Spanish often describes accidents impersonally using expressions like  
-“le cae a uno encima”.
-</div>
-</div>
 
-<div class="item">
-<div class="header">7. Literal Vocab <span class="arrow">▼</span></div>
-<div class="content">
-O = or<br>
-a veces = sometimes<br>
-le = to him/her/you<br>
-cae = falls<br>
-encima = on top<br>
-fractura = fracture<br>
-asegurada = guaranteed
+In this loop, what word was used to say **“on top (of)”**?
+
+In this loop, what word was used to say **“fracture”**?
+
+In this loop, what word was used to say **“guaranteed”**?
+
 </div>
 </div>
 
+<!-- 11 -->
 <div class="item">
-<div class="header">Vocab Quiz <span class="arrow">▼</span></div>
+<div class="header">11. Tags <span class="arrow">▼</span></div>
 <div class="content">
-What word means “on top”? → encima<br>
-What word means “fracture”? → fractura<br>
-What word means “guaranteed”? → asegurada
+o, veces, le, cae, uno, encima, ahí, fractura, asegurada
 </div>
 </div>
 
@@ -635,7 +709,15 @@ updateRegion()
 
 document.querySelectorAll(".header").forEach(header=>{
 header.addEventListener("click",()=>{
+
+document.querySelectorAll(".item").forEach(i=>{
+if(i!==header.parentElement){
+i.classList.remove("active")
+}
+})
+
 header.parentElement.classList.toggle("active")
+
 })
 })
 
