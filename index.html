@@ -685,15 +685,7 @@ updateRegion()
 
 document.querySelectorAll(".header").forEach(header=>{
 header.addEventListener("click",()=>{
-
-document.querySelectorAll(".item").forEach(i=>{
-if(i!==header.parentElement){
-i.classList.remove("active")
-}
-})
-
 header.parentElement.classList.toggle("active")
-
 })
 })
 
